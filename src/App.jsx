@@ -1,35 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import AppLayout from "./Layout/AppLayout";
+import Category from "./pages/Category";
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import GifPage from "./pages/GifPage";
+import Fav from "./pages/Fav";
+import GifProvider from "./Context/gifContext";
+
+// pages we will build
+
+// home
+// categories
+// search
+// single gif page
+// fav
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/:category",
+        element: <Category />,
+      },
+      {
+        path: "/search/:query",
+        element: <Search />,
+      },
+      {
+        path: "/:type/:slug",
+        element: <GifPage />,
+      },
+      {
+        path: "/fav",
+        element: <Fav />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <GifProvider>
+      <RouterProvider router={router} />
+    </GifProvider>
+  );
 }
 
-export default App
+export default App;
