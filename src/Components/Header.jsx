@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LuAnchor } from "react-icons/lu";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { GifState } from "../Context/gifContext";
+import GifSearch from "./GifSearch";
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -86,6 +87,7 @@ function Header() {
       </div>
 
       {/* search */}
+      <GifSearch />
     </nav>
   );
 }
